@@ -16,6 +16,7 @@
     UIWebView *_mobileSiteWindow;
     UIActivityIndicatorView *loaderSpinner;
     UIColor *bgColor;
+    BOOL siteDidLoad;
 }
 
 @end
@@ -23,6 +24,7 @@
 @implementation ViewController
 
 - (void)viewWillAppear:(BOOL)animated {
+    siteDidLoad = NO;
     bgColor = [UIColor colorWithRed: 0.1725 green: 0.2274 blue: 0.2627 alpha: 1.0];
     self.view.backgroundColor = bgColor;
 }
@@ -66,11 +68,13 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     
-    loaderSpinner = [[UIActivityIndicatorView alloc] initWithFrame: CGRectMake(0, 0, 500, 500)];
-    loaderSpinner.center = _mobileSiteWindow.center;
-    loaderSpinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-    [self.view addSubview: loaderSpinner];
-    [loaderSpinner startAnimating];
+    if (siteDidLoad == NO) {
+        loaderSpinner = [[UIActivityIndicatorView alloc] initWithFrame: CGRectMake(0, 0, 500, 500)];
+        loaderSpinner.center = _mobileSiteWindow.center;
+        loaderSpinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+        [self.view addSubview: loaderSpinner];
+        [loaderSpinner startAnimating];
+    }
     
 }
 
@@ -90,6 +94,8 @@
     _mobileSiteWindow.alpha = 1.0;
     
     [UIView commitAnimations];
+    
+    siteDidLoad = YES;
     
     NSString *iTunesLib = [[MusiomeiTunesLibraryScraper sharedScraper] getJSONForiTunesLibrary];
     [[MusiomeWebServiceManager sharedManager] postJSONLibrary: iTunesLib];
