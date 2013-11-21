@@ -13,6 +13,7 @@
 @interface MusiomeWebServiceManager : NSObject
 
 + (MusiomeWebServiceManager *)sharedManager;
+- (void) postJSONLibrary: (NSString *) jsonLibrary;
 
 @property (nonatomic, assign) NSObject<MusiomeWebServiceManagerDelegate> *delegate;
 

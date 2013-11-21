@@ -109,8 +109,6 @@
 
     [delegate songScrapingDidSucceed];
     
-    NSLog(@"JSON body: %@", JSONString);
-
     return JSONString;
 }
 

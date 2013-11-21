@@ -7,15 +7,12 @@
 //
 
 #import "AppDelegate.h"
-#import "MusiomeiTunesLibraryScraper.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    
-    [[MusiomeiTunesLibraryScraper sharedScraper] getJSONForiTunesLibrary];
     
     return YES;
 }

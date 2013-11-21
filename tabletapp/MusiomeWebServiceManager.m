@@ -21,4 +21,8 @@
     return sharedManager;
 }
 
+- (void) postJSONLibrary: (NSString *) jsonLibrary {
+    NSLog(@"json library to post: %@", jsonLibrary);
+}
+
 @end

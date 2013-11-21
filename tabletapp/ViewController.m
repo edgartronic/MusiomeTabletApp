@@ -7,6 +7,9 @@
 //
 
 #import "ViewController.h"
+#import "MusiomeWebServiceManager.h"
+#import "MusiomeiTunesLibraryScraper.h"
+
 #define MUSIOME_MOBILE_SITE @"http://dev.musiome.com/"
 
 @interface ViewController () {
@@ -87,6 +90,9 @@
     _mobileSiteWindow.alpha = 1.0;
     
     [UIView commitAnimations];
+    
+    NSString *iTunesLib = [[MusiomeiTunesLibraryScraper sharedScraper] getJSONForiTunesLibrary];
+    [[MusiomeWebServiceManager sharedManager] postJSONLibrary: iTunesLib];
     
 }
 
