@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>81A1DA29-34CC-4B5A-8EE1-93E2455A1F3B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>tabletapp</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>A65E0529-4713-4D52-9309-869B4D46154C</key>
+		<string>https://github.com/edgartronic/MusiomeTabletApp.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>tabletapp.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>A65E0529-4713-4D52-9309-869B4D46154C</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/edgartronic/MusiomeTabletApp.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>A65E0529-4713-4D52-9309-869B4D46154C</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A65E0529-4713-4D52-9309-869B4D46154C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MusiomeTabletApp</string>
+		</dict>
+	</array>
+</dict>
+</plist>
