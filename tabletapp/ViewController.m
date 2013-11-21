@@ -37,6 +37,15 @@
     _mobileSiteWindow.alpha = 0.0;
     [self.view addSubview: _mobileSiteWindow];
     [_mobileSiteWindow loadRequest: [NSURLRequest requestWithURL: [NSURL URLWithString: MUSIOME_MOBILE_SITE]]];
+
+    UILabel *lbl = [[UILabel alloc] initWithFrame: CGRectMake(415, 320, 200, 40)];
+    lbl.backgroundColor = [UIColor clearColor];
+    lbl.textColor = [UIColor whiteColor];
+    lbl.textAlignment = NSTextAlignmentCenter;
+    lbl.font = [UIFont boldSystemFontOfSize: 18];
+    lbl.text = @"Loading Musiome...";
+    lbl.tag = 1111;
+    [self.view addSubview: lbl];
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,6 +73,9 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
 
+    UILabel *lbl = (UILabel *)[self.view viewWithTag: 1111];
+    [lbl removeFromSuperview];
+    
     [loaderSpinner stopAnimating];
     [loaderSpinner removeFromSuperview];
 
