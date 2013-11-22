@@ -99,9 +99,15 @@
         [songString appendString: skipCount];
         [songString appendString: rating];
         [songString appendString: persistentID];
-        [songString appendString:@"}\n"];
+        
+        if ([songsFromSongQuery lastObject] == song) {
+            [songString appendString:@"}\n"];
+        } else {
+            [songString appendString:@"},\n"];
+        }
         
         [JSONString appendString: songString];
+        
         
     }
     

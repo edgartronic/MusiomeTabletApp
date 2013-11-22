@@ -79,26 +79,30 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-
-    UILabel *lbl = (UILabel *)[self.view viewWithTag: 1111];
-    [lbl removeFromSuperview];
     
-    [loaderSpinner stopAnimating];
-    [loaderSpinner removeFromSuperview];
-
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration: 0.5];
-    [UIView setAnimationDelay: 0.0];
-    [UIView setAnimationCurve: UIViewAnimationCurveEaseOut];
-    
-    _mobileSiteWindow.alpha = 1.0;
-    
-    [UIView commitAnimations];
-    
-    siteDidLoad = YES;
-    
-    NSString *iTunesLib = [[MusiomeiTunesLibraryScraper sharedScraper] getJSONForiTunesLibrary];
-    [[MusiomeWebServiceManager sharedManager] postJSONLibrary: iTunesLib];
+    if (siteDidLoad == NO) {
+        
+        UILabel *lbl = (UILabel *)[self.view viewWithTag: 1111];
+        [lbl removeFromSuperview];
+        
+        [loaderSpinner stopAnimating];
+        [loaderSpinner removeFromSuperview];
+        
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration: 0.5];
+        [UIView setAnimationDelay: 0.0];
+        [UIView setAnimationCurve: UIViewAnimationCurveEaseOut];
+        
+        _mobileSiteWindow.alpha = 1.0;
+        
+        [UIView commitAnimations];
+        
+        NSString *iTunesLib = [[MusiomeiTunesLibraryScraper sharedScraper] getJSONForiTunesLibrary];
+        [[MusiomeWebServiceManager sharedManager] postJSONLibrary: iTunesLib];
+        
+        siteDidLoad = YES;
+        
+    }
     
 }
 
