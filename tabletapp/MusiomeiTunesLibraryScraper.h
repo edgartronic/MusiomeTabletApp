@@ -14,6 +14,7 @@
 
 + (MusiomeiTunesLibraryScraper *)sharedScraper;
 - (NSString *) getJSONForiTunesLibrary;
+- (NSString *) getJSONForiTunesPlaylists;
 
 @property (nonatomic, assign) NSObject<MusiomeiTunesLibraryScraperDelegate> *delegate;
 
@@ -26,5 +27,9 @@
 - (void) songScrapingDidBegin;
 - (void) songScrapingDidSucceed;
 - (void) songScrapingDidFail;
+
+- (void) playlistScrapingDidBegin;
+- (void) playlistScrapingDidSucceed;
+- (void) playlistScrapingDidFail;
 
 @end

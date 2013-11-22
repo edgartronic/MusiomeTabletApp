@@ -63,6 +63,10 @@
 #pragma mark UIWebView callbacks
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    
+    NSString *urlString = [[request URL] absoluteString];
+    NSLog(@"URL String: %@", urlString);
+    
     return YES;
 }
 
@@ -96,9 +100,10 @@
         _mobileSiteWindow.alpha = 1.0;
         
         [UIView commitAnimations];
-        
-        NSString *iTunesLib = [[MusiomeiTunesLibraryScraper sharedScraper] getJSONForiTunesLibrary];
-        [[MusiomeWebServiceManager sharedManager] postJSONLibrary: iTunesLib];
+
+        [[MusiomeiTunesLibraryScraper sharedScraper] getJSONForiTunesLibrary];
+        [[MusiomeiTunesLibraryScraper sharedScraper] getJSONForiTunesPlaylists];
+//        [[MusiomeWebServiceManager sharedManager] postJSONLibrary: iTunesLib];
         
         siteDidLoad = YES;
         
