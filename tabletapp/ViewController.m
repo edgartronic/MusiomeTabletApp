@@ -11,12 +11,14 @@
 #import "MusiomeiTunesLibraryScraper.h"
 
 #define MUSIOME_MOBILE_SITE @"http://dev.musiome.com/"
+#define MUSIOME_SESSION_ID @"musiomeSessionID"
 
 @interface ViewController () {
     UIWebView *_mobileSiteWindow;
     UIActivityIndicatorView *loaderSpinner;
     UIColor *bgColor;
     BOOL siteDidLoad;
+    NSString *sid;
 }
 
 @end
@@ -101,14 +103,26 @@
         
         [UIView commitAnimations];
 
-        [[MusiomeiTunesLibraryScraper sharedScraper] getJSONForiTunesLibrary];
-        [[MusiomeiTunesLibraryScraper sharedScraper] getJSONForiTunesPlaylists];
+        
+//        [[MusiomeiTunesLibraryScraper sharedScraper] getJSONForiTunesLibrary];
+//        [[MusiomeiTunesLibraryScraper sharedScraper] getJSONForiTunesPlaylists];
 //        [[MusiomeWebServiceManager sharedManager] postJSONLibrary: iTunesLib];
         
         siteDidLoad = YES;
         
     }
-    
+    [self getSessionIDFromCookie];
+}
+
+- (void) getSessionIDFromCookie {
+    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *cookie in [cookieJar cookies]) {
+        if ([[cookie name] isEqualToString: @"musiome.sid"]) {
+            sid = [cookie value];
+            [[NSUserDefaults standardUserDefaults] setObject: sid forKey: MUSIOME_SESSION_ID];
+            NSLog(@"Musiome Session ID: %@", sid);
+        }
+    }
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
