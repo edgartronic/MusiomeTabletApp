@@ -12,6 +12,7 @@
 
 #define MUSIOME_MOBILE_SITE @"http://dev.musiome.com/"
 #define MUSIOME_SESSION_ID @"musiomeSessionID"
+#define MUSIOME_SESSION_EXPIREDATE @"musiomeExpireDate"
 
 @interface ViewController () {
     UIWebView *_mobileSiteWindow;
@@ -19,6 +20,7 @@
     UIColor *bgColor;
     BOOL siteDidLoad;
     NSString *sid;
+    NSDate *expireDate;
 }
 
 @end
@@ -36,6 +38,8 @@
     [super viewDidLoad];
 
 	// Do any additional setup after loading the view, typically from a nib.
+    sid = [[NSUserDefaults standardUserDefaults] objectForKey: MUSIOME_SESSION_ID];
+    expireDate = [[NSUserDefaults standardUserDefaults] objectForKey: MUSIOME_SESSION_EXPIREDATE];
     
     _mobileSiteWindow = [[UIWebView alloc] initWithFrame: CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height - 20)];
     _mobileSiteWindow.delegate = self;
@@ -111,16 +115,29 @@
         siteDidLoad = YES;
         
     }
-    [self getSessionIDFromCookie];
+    
+    BOOL hasCookieExpired = ([[NSDate date] compare: expireDate] == NSOrderedDescending) ? YES : NO;
+    
+    // if the session ID pulled from NSUserDefaults is empty OR if the expiration date has been reached, get the session info from the cookie.
+    if (!sid || (sid && hasCookieExpired == YES)) {
+        [self getSessionIDFromCookie];
+    }
 }
 
 - (void) getSessionIDFromCookie {
+    
     NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+
     for (NSHTTPCookie *cookie in [cookieJar cookies]) {
-        if ([[cookie name] isEqualToString: @"musiome.sid"]) {
+        
+        if ([[cookie name] isEqualToString: @"musiome.sid"] && [[cookie domain] isEqualToString: @"dev.musiome.com"]) {
+
+            [[NSUserDefaults standardUserDefaults] setObject: [cookie value] forKey: MUSIOME_SESSION_ID];
+            [[NSUserDefaults standardUserDefaults] setObject: [cookie expiresDate] forKey: MUSIOME_SESSION_EXPIREDATE];
+            
             sid = [cookie value];
-            [[NSUserDefaults standardUserDefaults] setObject: sid forKey: MUSIOME_SESSION_ID];
-            NSLog(@"Musiome Session ID: %@", sid);
+            expireDate = [cookie expiresDate];
+            
         }
     }
 }
